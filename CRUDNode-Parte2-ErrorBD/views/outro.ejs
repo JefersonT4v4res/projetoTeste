@@ -1,0 +1,65 @@
+<% data.forEach(function(details) { %>
+    <form action="/edit/<%= details._id %>" method="POST">
+    <div class="container-fluid">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-5">
+                  <label>Nome:</label>
+                  <input type="text" id="nome" value="<%= details.Inpname %>" name="Inpname">
+                </div>
+                <div class="col-sm-5">
+                   <label>Nome fantasia:</label>
+                   <input type="text" id="fantasia" value="<%= details.InpFantasia %>" name="InpFantasia">
+                </div>
+            </div>
+            
+    
+            <div id="div2" class="row">
+                <div class="col-sm-5">
+                  <br>
+                  <label>CNPJ:</label>
+                  <input type="text" id="cnpj" value="<%= details.inpCnpj %>" name="inpCnpj">
+                </div>
+                <div class="col-md-5">
+                  <br>
+                  <label>Email:</label>
+                  <input type="text" id="email" value="<%= details.InpEmail %>" name="InpEmai">
+                </div>
+            </div>
+    
+           <br>
+            <div class="row">
+                <div id="div3" class="col-sm-5">
+                  <label>Contato:</label>
+                  <input type="text" id="telefone" value="<%= details.InpTel %>" name="InpTel">
+                </div>
+                <div class="col-sm-5">
+                  <label>Endereço:</label>
+                  <input type="text" id="endereco" value="<%= details.InpEnd %>" name="InpEnd">
+                </div>
+            </div>
+            
+            <div id="div4" class="row">
+                <div class="col-sm-5">
+                  <br>
+                  <label>Cidade:</label>
+                  <input type="text" id="cidade" value="<%= details.InpCity %>" name="InpCity">
+                </div>
+                <div class="col-md-5">
+                  <br>
+                  <label>Estado:</label>
+                  <input type="text" id="estado" value="<%= details.InpEs %>" name="InpEs">
+                </div>
+            </div>  
+            <br />
+          </div>     
+        </div>
+      </div> 
+    </div>
+    <button><a href="/show">Voltar</a></button> 
+    <button type="submit">Editar</button>
+    <% }) %>
+    </form> 
+    
+    
