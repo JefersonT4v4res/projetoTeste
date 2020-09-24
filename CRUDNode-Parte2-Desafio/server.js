@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/', (req, res) =>{
-    let cursor = db.collection('data').find();
+    var cursor = db.collection('data').find();
 });
 
 app.get('/show', (req, res) => {
@@ -43,15 +43,11 @@ app.post('/show', (req, res) => {
 
         console.log('salvo no banco de dados');
         res.redirect('/show');
-        //db.collection('data').find().toArray((err, results) => {
-      //      console.log(results);
-      //  })
     });
 });
 
-app.route('/edit/:id')
-.get((req, res) => {
-  let id = req.params.id;
+app.route('/edit/:id').get((req, res) => {
+  var id = req.params.id;
 
   db.collection('data').find(ObjectId(id)).toArray((err, result) => {
        if(err) return res.send(err)
@@ -61,15 +57,15 @@ app.route('/edit/:id')
 
 
  .post((req, res) => {
-     let id = req.params.id;
-     let Inpname = req.body.Inpname;
-     let InpFantasia = req.body.InpFantasia;
-     let inpCnpj = req.body.inpCnpj;
-     let InpEmail = req.body.InpEmail;
-     let InpTel = req.body.InpTel;
-     let InpEnd = req.body.InpEnd;
-     let InpCity = req.body.InpCity;
-     let InpEs = req.body.InpEs;
+     var id = req.params.id;
+     var Inpname = req.body.Inpname;
+     var InpFantasia = req.body.InpFantasia;
+     var inpCnpj = req.body.inpCnpj;
+     var InpEmail = req.body.InpEmail;
+     var InpTel = req.body.InpTel;
+     var InpEnd = req.body.InpEnd;
+     var InpCity = req.body.InpCity;
+     var InpEs = req.body.InpEs;
 
      db.collection('data').updateOne({_id: ObjectId(id)}, {
      $set: {
@@ -92,9 +88,8 @@ app.route('/edit/:id')
 
  })
 
- app.route('/delete/:id')
-  .get((req, res) => {
-     let id = req.params.id;
+ app.route('/delete/:id').get((req, res) => {
+     var id = req.params.id;
 
        db.collection('data').deleteOne({_id: ObjectId(id)}, (err, result) => {
            if(err) return res.send(500, err)

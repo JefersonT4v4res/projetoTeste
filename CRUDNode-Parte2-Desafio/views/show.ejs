@@ -72,8 +72,8 @@ div#div1{
                 </tr>
             </thead>
             <tbody>
+              <% data.forEach(function(details) { %>
                 <tr>
-                    <% data.forEach(function(details) { %>
                    <td><%= details.Inpname %></td>
                    <td><%= details.InpFantasia %></td>
                    <td><%= details.inpCnpj %></td>
