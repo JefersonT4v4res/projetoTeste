@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>CRUD Library</title>
+
+  <style>
+    body {
+  font-size: 20px;
+  padding: 0;
+  height: 200%;
+  width: 100%;
+  overflow: auto;
+  background-color: cornsilk;
+}
+
+
+button#btnNovo {
+  left: 80%;
+  bottom: 60%;
+  width: 100px;
+}
+
+
+h2 {
+  font-size: 25px;
+  font: bold;
+  text-align: center;
+}
+
+div#div5{
+    left: 80%;
+  bottom: 60%;
+  width: 10%;
+}
+
+  </style>
+
+
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color:rgb(17, 9, 68); border-top-color: #000;">
+        <a class="navbar-brand" href="">
+         <img src="https://scontent-for1-1.xx.fbcdn.net/v/t1.0-9/119769804_3503780869658447_9157142273785200666_n.jpg?_nc_cat=106&_nc_sid=730e14&_nc_ohc=YCK8_4mpRxUAX_Iwt5q&_nc_ht=scontent-for1-1.xx&oh=d9a3620ea2ca32dd81d6fe9bd570d56f&oe=5F88E7ED" width="130" height="100"usemap="#workmap">
+        </a>
+        <map name="workmap">
+          <area shape="rect" coords="-00,-00,130,98" alt="logo" href="http://localhost:3000/show-empresa">
+        </map>
+    </nav>
+
+   <h2>Registros<h2>
+    <br>   
+
+
+    <div class="container-fluid">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                   <th>Nome</th>
+                   <th>Nome fantasia</th>
+                   <th>CNPJ</th>
+                   <th>Email</th>
+                   <th>Contato</th>
+                   <th>Endereço</th>
+                   <th>Cidade</th>
+                   <th>Estado</th>
+                   <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% empresa.forEach(function(details) { %>
+                <tr>
+                   <td><%= details.Inpname %></td>
+                   <td><%= details.InpFantasia %></td>
+                   <td><%= details.inpCnpj %></td>
+                   <td><%= details.InpEmail %></td>
+                   <td><%= details.InpTel %></td>
+                   <td><%= details.InpEnd %></td>
+                   <td><%= details.InpCity %></td>
+                   <td><%= details.InpEs %></td>
+                   <td><a href="/edit-empresa/<%= details._id %>">Editar</a> - <a href="/delete/<%= details._id %>">Deletar</a></td>
+                </tr>
+                   <% }) %>
+            </tbody>
+        </table>
+    </div> 
+       
+  <div id="div5" class="container">
+    <div class="row">
+        <button id="btnNovo"><a href="/">Novo</a></button>
+    </div>
+  </div>
+        
+</body>
+</html>

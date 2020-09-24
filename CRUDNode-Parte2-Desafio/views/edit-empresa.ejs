@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>CRUD Library</title>
+
+
+ <style>
+       body {
+  font-size: 20px;
+  padding: 0;
+  height: 200%;
+  width: 100%;
+  overflow: auto;
+  background-color: cornsilk;
+       }
+
+h2 {
+  font-size: 25px;
+  font: bold;
+  text-align: center;
+}
+
+
+button#btnVoltar #btnEditar {
+  position: relative;
+  left: 0%;
+  width: 10%;
+  padding: 3px ;
+  border: 2;
+  text-align: center;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover {opacity: 1}
+
+input#telefone{
+  width: 260px;
+}
+input#cnpj{
+  width: 240px;
+}
+input#nome{
+  width: 400px;
+}
+input#fantasia{
+  width: 400px;
+}
+input#cidade{
+  width: 300px;
+}
+input#estado{
+  width: 100px;
+}
+input#endereco{
+  width: 950px;
+}
+input#email{
+  width: 450px;
+}
+
+ </style>
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg" style="background-color:rgb(17, 9, 68); border-top-color: #000;">
+    <a class="navbar-brand" href="">
+     <img src="https://scontent-for1-1.xx.fbcdn.net/v/t1.0-9/119769804_3503780869658447_9157142273785200666_n.jpg?_nc_cat=106&_nc_sid=730e14&_nc_ohc=YCK8_4mpRxUAX_Iwt5q&_nc_ht=scontent-for1-1.xx&oh=d9a3620ea2ca32dd81d6fe9bd570d56f&oe=5F88E7ED" width="130" height="100" usemap="#workmap">
+    </a>
+    <map name="workmap">
+      <area shape="rect" coords="-00,-00,130,98" alt="logo" href="http://localhost:3000/show-empresa">
+    </map>
+
+</nav>
+
+<div class="container pt-3">
+</div>    
+
+<h2>Editar Registro<h2>
+  <% empresa.forEach(function(details) { %>
+    <form action="/edit-empresa/<%= details._id %>" method="POST">
+  
+      <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-sm-5">
+                    <label>Nome:</label>
+                    <input type="text" id="nome" value="<%= details.Inpname %>" name="Inpname">
+                  </div>
+                  <div class="col-sm-7">
+                     <label>Nome fantasia:</label>
+                     <input type="text" id="fantasia" value="<%= details.InpFantasia %>" name="InpFantasia">
+                  </div>
+              </div>
+              
+              <br>
+              <div id="div2" class="row">
+                  <div class="col-sm-3">
+                    <label>CNPJ:</label>
+                    <input type="text" id="cnpj" value="<%= details.inpCnpj %>" name="inpCnpj">
+                  </div>
+                  <div id="div3" class="col-sm-4">
+                    <label>Contato:</label>
+                    <input type="text" id="telefone" value="<%= details.InpTel %>" name="InpTel">
+                  </div>
+                  <div class="col-md-5">
+                    <label>Email:</label>
+                    <input type="text" id="email" value="<%= details.InpEmail %>" name="InpEmail">
+                  </div>
+              </div>
+              <br>
+      
+              <div class="row">
+                <div class="col-sm-10">
+                  <label>Endereço:</label>
+                  <input type="text" id="endereco" value="<%= details.InpEnd %>" name="InpEnd">
+                </div>
+            </div>
+              
+              <div id="div4" class="row">
+                  <div class="col-sm-4">
+                    <br>
+                    <label>Cidade:</label>
+                    <input type="text" id="cidade" value="<%= details.InpCity %>" name="InpCity">
+                  </div>
+                  <div class="col-md-6">
+                    <br>
+                    <label>Estado:</label>
+                    <select class="select h-50 w-50" id="estado" value="<%= details.InpEs %>" name="InpEs">
+                      <option value="">Selecionar</option>
+                      <option>AC</option>
+                      <option>AL</option>
+                      <option>AP</option>
+                      <option>AM</option>
+                      <option>BA</option>
+                      <option>CE</option>
+                      <option>DF</option>
+                      <option>ES</option>
+                      <option>GO</option>
+                      <option>MA</option>
+                      <option>MT</option>
+                      <option>MS</option>
+                      <option>MG</option>
+                      <option>PA</option>
+                      <option>PB</option>
+                      <option>PR</option>
+                      <option>PE</option>
+                      <option>PI</option>
+                      <option>RJ</option>
+                      <option>RN</option>
+                      <option>RS</option>
+                      <option>RO</option>
+                      <option>RR</option>
+                      <option>SC</option>
+                      <option>SP</option>
+                      <option>SE</option>
+                      <option>TO</option>
+                    </select>
+                  </div>
+              </div>  
+              <br />
+            </div>     
+          </div>
+        </div> 
+      </div>
+      <button id="btnVoltar"><a href="/show-empresa">Voltar</a></button> 
+      <button id="btnEditar" type="submit">Editar</button>
+    </form> 
+    <% }) %>
+    
+    
+    </body>
+    </html>

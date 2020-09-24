@@ -1,15 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const { ObjectId } = require('mongodb');
 const app = express();
+const bodyParser = require('body-parser');
+const { ObjectID } = require('mongodb');
+
+const path = require('path');
+
+const ObjectId = require('mongodb').ObjectID;
 
 const MongoClient = require('mongodb').MongoClient;
 
-const uri = "mongodb+srv://admirJr:adminadmin@cluster0.rwhcd.mongodb.net/Cluster0";
+const uri = 'mongodb+srv://desafio1cdm:desafio1cdm@desafio1cdm.njqir.mongodb.net/Desafio1CDM';
 
 MongoClient.connect(uri, (err, client) => {
     if (err) return console.log(err)
-    db = client.db('Cluster0')
+    db = client.db('Desafio1CDM')
 
     app.listen(3000, () => {
         console.log('server running on port 3000');
@@ -18,56 +22,58 @@ MongoClient.connect(uri, (err, client) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.set('View engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('index.ejs');
+    res.render('index-empresa.ejs');
 });
 
 app.get('/', (req, res) =>{
-    var cursor = db.collection('data').find();
+    let cursor = db.collection('empresa').find();
 });
 
-app.get('/show', (req, res) => {
-    db.collection('data').find().toArray((err, results) => {
+app.get('/show-empresa', (req, res) => {
+    db.collection('empresa').find().toArray((err, results) => {
         if (err) return console.log(err)
-        res.render('show.ejs', { data: results });
+        res.render('show-empresa.ejs', { empresa: results });
 
     });
 });
 
-app.post('/show', (req, res) => {
-    db.collection('data').save(req.body, (err, result) => {
+app.post('/show-empresa', (req, res) => {
+    db.collection('empresa').save(req.body, (err, result) => {
         if (err) return console.log(err);
 
         console.log('salvo no banco de dados');
-        res.redirect('/show');
+        res.redirect('/show-empresa');
     });
 });
 
-app.route('/edit/:id').get((req, res) => {
-  var id = req.params.id;
+app.route('/edit-empresa/:id').get((req, res) => {
+  let id = req.params.id;
 
-  db.collection('data').find(ObjectId(id)).toArray((err, result) => {
+  db.collection('empresa').find(ObjectId(id)).toArray((err, result) => {
        if(err) return res.send(err)
-        res.render('edit.ejs', { data: result });
+        res.render('edit-empresa.ejs', { empresa: result });
   });
 })
 
 
  .post((req, res) => {
-     var id = req.params.id;
-     var Inpname = req.body.Inpname;
-     var InpFantasia = req.body.InpFantasia;
-     var inpCnpj = req.body.inpCnpj;
-     var InpEmail = req.body.InpEmail;
-     var InpTel = req.body.InpTel;
-     var InpEnd = req.body.InpEnd;
-     var InpCity = req.body.InpCity;
-     var InpEs = req.body.InpEs;
+     let id = req.params.id;
+     let Inpname = req.body.Inpname;
+     let InpFantasia = req.body.InpFantasia;
+     let inpCnpj = req.body.inpCnpj;
+     let InpEmail = req.body.InpEmail;
+     let InpTel = req.body.InpTel;
+     let InpEnd = req.body.InpEnd;
+     let InpCity = req.body.InpCity;
+     let InpEs = req.body.InpEs;
 
-     db.collection('data').updateOne({_id: ObjectId(id)}, {
+     db.collection('empresa').updateOne({_id: ObjectId(id)}, {
      $set: {
         Inpname: Inpname,
         InpFantasia: InpFantasia,
@@ -78,23 +84,23 @@ app.route('/edit/:id').get((req, res) => {
         InpCity: InpCity,
         InpEs: InpEs
 
-     }
+     },
      
-    }, (err, result) => {
+    }, 
+    (err, result) => {
         if (err) return res.send(err)
-        res.redirect('/show');
+        res.redirect('/show-empresa');
         console.log('Atualizado no Banco de Dados');
     });
-
  })
 
- app.route('/delete/:id').get((req, res) => {
-     var id = req.params.id;
+ app.route('/delete-empresa/:id').get((req, res) => {
+     let id = req.params.id;
 
-       db.collection('data').deleteOne({_id: ObjectId(id)}, (err, result) => {
+       db.collection('empresa').deleteOne({_id: ObjectId(id)}, (err, result) => {
            if(err) return res.send(500, err)
            console.log('Deletado do Banco de Dados!');
-           res.redirect('/show');
+           res.redirect('/show-empresa');
        });
   });
 
